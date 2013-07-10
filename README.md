@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 #This is my first edit COMPUTER SCIENCE FUNDAMENTALS (CSF)
+=======
+#Rudd's COMPUTER SCIENCE FUNDAMENTALS (CSF)
+>>>>>>> upstream/master
 ###COURSE SYLLABUS
 
 **SESSION 1:**

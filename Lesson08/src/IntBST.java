@@ -9,7 +9,7 @@ public class IntBST {
         queue.add(rootNode);
         System.out.print("BFS of BST:" );
 
-        while(!queue.isEmpty()) {
+        while(!queue.isEmpty()) {      // breadth first printing  (prints every level completely) vs. depth first searches
             IntNode node = queue.remove();
             System.out.print(node.getValue() + " ");
 
@@ -21,14 +21,43 @@ public class IntBST {
     }
 
     public void insertValue(int value) {
+        //create new node
+        IntNode node = new IntNode(value);
+        if(rootNode==null){
+            rootNode = node;  // first iteration
+            return;
+        }
+
+        //while currentNode has children
+
+        //
+
+
+
+        }
+        //
+
+
         // TODO: Implement insert value for a binary search tree
-        throw new UnsupportedOperationException("Not implemented!");
+        //throw new UnsupportedOperationException("Not implemented!");
     }
+
+    private void setNode(IntNode currNode, IntNode node){
+
+        if(node.getValue()>currNode.getValue()){
+            currNode.setRightChild(node);
+        } else {
+            currNode.setLeftChild(node);
+        }
+
+
+    }
+
 
     public boolean search(int value) {
         // TODO: Implement search for a value for a binary search tree
         throw new UnsupportedOperationException("Not implemented!");
-        return false;
+        //return false;
     }
 
     public void remove(int value) {

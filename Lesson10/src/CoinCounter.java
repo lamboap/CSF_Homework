@@ -1,6 +1,9 @@
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class CoinCounter {
     public static int CHANGE_NOT_POSSIBLE_FLAG = Integer.MAX_VALUE;
@@ -52,7 +55,24 @@ public class CoinCounter {
             Assignment: Implement this algorithm below and make testSimpleNumberOfCoinsRequired pass.
          */
 
-        throw new NotImplementedException();
+        int totalNumOfCoins=0;
+        int greatestValue = 0;
+        while(totalSum>0){
+        //what is the greatest value coin less than the totalSum
+         for(int i=0;i<denominations.length;i++){
+
+             if(denominations[i]<=totalSum){
+                 greatestValue = denominations[i];
+             }
+         }
+        //subtract that coin value
+        totalSum -=greatestValue;
+        totalNumOfCoins++;
+        }
+
+
+
+        return totalNumOfCoins;
     }
 
     /**
@@ -75,12 +95,14 @@ public class CoinCounter {
             algorithm, we will use memoization.
 
             Our algorithm must do the following:
-                * For each possible value, from 1 to totalSum
-                 * If that value is a coin denomination, it's required count is 1
+                * For each possible value, from 1 to totalSum -- [create an array with 100 elements] in our test
+                 * If that value is a coin denomination, it's required count is 1 -- count at denomination index = 1
+
                  * If not, examine that value minus all possible denominations
                     * e.g. If the value was 8, you would look at the number of coins
                       required for 8 - 7, 8 - 5 and 8 - 1.
                  * Take the smallest of those values, plus one
+
                  * Repeat
                 * Return the calculated value for totalSum
 
@@ -88,8 +110,44 @@ public class CoinCounter {
             Second assignment: Make testWonderlandDenominations pass
             Third assignment: Make testTerribleDenominations pass
          */
+        if(totalSum==0){
+            return 0;
+        }
 
-        throw new NotImplementedException();
+        int[] memoizedArray = new int[totalSum+1];
+        memoizedArray[0] = 0;
+
+
+
+        for(int i=1;i<memoizedArray.length;i++){
+            List<Integer> listNumberOfCoins =  new ArrayList<Integer>();
+
+                for(int j=0;j<denominations.length;j++){
+
+                    if(i==denominations[j]){
+                        memoizedArray[i] = 1;  // equals a denomination amount
+                    } else {
+                        if(i - denominations[j]>0){
+                            int numberOfCoins = memoizedArray[i-denominations[j]];  //examine that value minus all possible denominations
+                            listNumberOfCoins.add(numberOfCoins);
+                            int numCoins  = Collections.min(listNumberOfCoins);  // Take the smallest of those values, plus one
+                            memoizedArray[i] = numCoins+1;
+                        }   // else max integer
+                        }
+                    }
+
+
+                }
+
+        int numberOfCoinsAtTotalSum = memoizedArray[totalSum];
+
+        return numberOfCoinsAtTotalSum;
+
+    }
+
+
+
+        //throw new NotImplementedException();
 
         // Instructor sample soln: Remove before giving to students:
         // Speed, O(m * n), m = totalSum, n = number of coins
@@ -100,5 +158,5 @@ public class CoinCounter {
         }
 
         return numberOfCoinsRequiredAtValue[totalSum];*/
-    }
 }
+
